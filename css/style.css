@@ -492,8 +492,9 @@ textarea {
     position: relative;
     width: 24px;
     height: 2px;
-    background-color: var(--text-primary);
-    transition: var(--transition-base);
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 2px;
 }
 
 .hamburger::before,
@@ -503,30 +504,49 @@ textarea {
     left: 0;
     width: 24px;
     height: 2px;
-    background-color: var(--text-primary);
-    transition: var(--transition-base);
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 2px;
 }
 
 .hamburger::before {
     top: -8px;
+    width: 18px;
 }
 
 .hamburger::after {
     top: 8px;
+    width: 12px;
+}
+
+.mobile-menu-btn:hover .hamburger,
+.mobile-menu-btn:hover .hamburger::before,
+.mobile-menu-btn:hover .hamburger::after {
+    background: linear-gradient(90deg, #f093fb, #f5576c);
+}
+
+.mobile-menu-btn:hover .hamburger::before,
+.mobile-menu-btn:hover .hamburger::after {
+    width: 24px;
 }
 
 .mobile-menu-btn.active .hamburger {
     background-color: transparent;
+    background: transparent;
 }
 
 .mobile-menu-btn.active .hamburger::before {
     top: 0;
+    width: 24px;
     transform: rotate(45deg);
+    background: linear-gradient(90deg, #f093fb, #f5576c);
 }
 
 .mobile-menu-btn.active .hamburger::after {
     top: 0;
+    width: 24px;
     transform: rotate(-45deg);
+    background: linear-gradient(90deg, #f093fb, #f5576c);
 }
 
 /* ===== Hero Section ===== */
