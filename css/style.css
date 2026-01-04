@@ -93,6 +93,20 @@
     box-sizing: border-box;
 }
 
+/* Custom Text Selection */
+::selection {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    background-color: #667eea;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background-color: #667eea;
+    color: #ffffff;
+    text-shadow: none;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
