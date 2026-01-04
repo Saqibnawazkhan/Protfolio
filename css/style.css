@@ -876,12 +876,18 @@ textarea {
 .hero-subtitle .typing-cursor {
     color: var(--primary-color);
     font-weight: 300;
-    animation: blink 1s infinite;
+    animation: blink 0.8s infinite, cursorGlow 2s ease-in-out infinite;
+    text-shadow: 0 0 10px var(--primary-color);
 }
 
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+}
+
+@keyframes cursorGlow {
+    0%, 100% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); }
+    50% { text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color), 0 0 60px var(--primary-color); }
 }
 
 .hero-subtitle .separator {
