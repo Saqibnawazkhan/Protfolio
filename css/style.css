@@ -476,33 +476,57 @@ textarea {
 .decoration-1 {
     width: 300px;
     height: 300px;
-    background: var(--bg-gradient-1);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     top: 10%;
     left: -5%;
+    animation: floatDecoration1 8s ease-in-out infinite;
 }
 
 .decoration-2 {
     width: 400px;
     height: 400px;
-    background: var(--bg-gradient-2);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     top: 5%;
     right: -10%;
+    animation: floatDecoration2 10s ease-in-out infinite;
 }
 
 .decoration-3 {
     width: 250px;
     height: 250px;
-    background: var(--bg-gradient-3);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     bottom: 20%;
     right: 20%;
+    animation: floatDecoration3 7s ease-in-out infinite;
 }
 
 .decoration-4 {
     width: 200px;
     height: 200px;
-    background: rgba(45, 182, 125, 0.2);
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     bottom: 30%;
     left: 10%;
+    animation: floatDecoration4 9s ease-in-out infinite;
+}
+
+@keyframes floatDecoration1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -20px) scale(1.1); }
+}
+
+@keyframes floatDecoration2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-40px, 30px) rotate(10deg); }
+}
+
+@keyframes floatDecoration3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -30px) scale(0.9); }
+}
+
+@keyframes floatDecoration4 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, 20px); }
 }
 
 /* Social Sidebar */
