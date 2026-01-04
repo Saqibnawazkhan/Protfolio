@@ -773,7 +773,33 @@ textarea {
     border-radius: var(--radius-md);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+}
+
+/* Tooltip for social sidebar */
+.social-sidebar a::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: 55px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.social-sidebar a:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
 }
 
 .social-sidebar a::before {
