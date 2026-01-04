@@ -2004,8 +2004,16 @@ textarea {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(45, 182, 125, 0.1);
+    border-color: transparent;
+    background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+                linear-gradient(135deg, #667eea, #764ba2, #f093fb) border-box;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3), 0 0 40px rgba(118, 75, 162, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group input,
+.form-group textarea {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .form-group input::placeholder,
