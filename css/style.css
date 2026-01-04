@@ -1469,9 +1469,19 @@ textarea {
     left: -20px;
     right: 20px;
     bottom: 20px;
-    border: 3px solid var(--primary-color);
+    border: 3px solid transparent;
     border-radius: var(--radius-2xl);
     z-index: -1;
+    background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+                linear-gradient(135deg, #667eea, #764ba2, #f093fb, #667eea) border-box;
+    background-size: 100% 100%, 400% 400%;
+    animation: decorBorder 8s ease infinite;
+}
+
+@keyframes decorBorder {
+    0% { background-position: 0% 0%, 0% 50%; }
+    50% { background-position: 0% 0%, 100% 50%; }
+    100% { background-position: 0% 0%, 0% 50%; }
 }
 
 .experience-badge {
