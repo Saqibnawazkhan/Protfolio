@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollToTop();
     initTestimonialSlider();
     initTypingAnimation();
+    initTiltEffect();
+    initMagneticButtons();
+    initCursorEffect();
+    initParticles();
+    initTextReveal();
+    initRippleEffect();
+    initSmoothCounter();
+    initImageHover();
+    initNavHover();
+    initCardShine();
 });
 
 /**
@@ -843,6 +853,400 @@ function initReviewSystem() {
 // Initialize review system when DOM is ready
 document.addEventListener('DOMContentLoaded', initReviewSystem);
 
+/**
+ * 3D Tilt Effect for Cards
+ */
+function initTiltEffect() {
+    const cards = document.querySelectorAll('.service-card, .portfolio-card, .skills-category');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    });
+}
+
+/**
+ * Magnetic Button Effect
+ */
+function initMagneticButtons() {
+    const buttons = document.querySelectorAll('.btn, .social-link, .portfolio-link');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0)';
+        });
+    });
+}
+
+/**
+ * Custom Cursor Effect
+ */
+function initCursorEffect() {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    const cursorFollower = document.createElement('div');
+    cursorFollower.className = 'cursor-follower';
+    document.body.appendChild(cursor);
+    document.body.appendChild(cursorFollower);
+
+    // Add styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .custom-cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.3s ease, width 0.3s, height 0.3s;
+            opacity: 0.5;
+        }
+        .cursor-hover {
+            transform: scale(1.5);
+        }
+        .cursor-follower.hover {
+            width: 60px;
+            height: 60px;
+            border-color: #f093fb;
+        }
+        @media (max-width: 768px) {
+            .custom-cursor, .cursor-follower { display: none; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX - 5 + 'px';
+        cursor.style.top = mouseY - 5 + 'px';
+    });
+
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+        cursorFollower.style.left = cursorX - 20 + 'px';
+        cursorFollower.style.top = cursorY - 20 + 'px';
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effect on interactive elements
+    const hoverElements = document.querySelectorAll('a, button, .service-card, .portfolio-card');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('cursor-hover');
+            cursorFollower.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor-hover');
+            cursorFollower.classList.remove('hover');
+        });
+    });
+}
+
+/**
+ * Particle Background Effect
+ */
+function initParticles() {
+    const heroSection = document.querySelector('.hero');
+    if (!heroSection) return;
+
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'particles-container';
+    particleContainer.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+    `;
+    heroSection.insertBefore(particleContainer, heroSection.firstChild);
+
+    for (let i = 0; i < 50; i++) {
+        createParticle(particleContainer);
+    }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    const size = Math.random() * 5 + 2;
+    const duration = Math.random() * 20 + 10;
+    const delay = Math.random() * 5;
+
+    particle.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: rgba(45, 182, 125, ${Math.random() * 0.5 + 0.2});
+        border-radius: 50%;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        animation: floatParticle ${duration}s ease-in-out ${delay}s infinite;
+    `;
+
+    container.appendChild(particle);
+
+    // Add keyframes if not exists
+    if (!document.getElementById('particle-keyframes')) {
+        const style = document.createElement('style');
+        style.id = 'particle-keyframes';
+        style.textContent = `
+            @keyframes floatParticle {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+                25% { transform: translate(30px, -30px) rotate(90deg); opacity: 1; }
+                50% { transform: translate(-20px, -60px) rotate(180deg); opacity: 0.7; }
+                75% { transform: translate(40px, -40px) rotate(270deg); opacity: 0.9; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/**
+ * Text Reveal Animation
+ */
+function initTextReveal() {
+    const titles = document.querySelectorAll('.section-title, .hero-title');
+
+    titles.forEach(title => {
+        const text = title.textContent;
+        title.innerHTML = '';
+        title.style.opacity = '1';
+
+        text.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.cssText = `
+                display: inline-block;
+                opacity: 0;
+                transform: translateY(50px) rotate(10deg);
+                animation: revealChar 0.5s ease forwards ${i * 0.03}s;
+            `;
+            title.appendChild(span);
+        });
+    });
+
+    // Add keyframes
+    if (!document.getElementById('text-reveal-keyframes')) {
+        const style = document.createElement('style');
+        style.id = 'text-reveal-keyframes';
+        style.textContent = `
+            @keyframes revealChar {
+                to { opacity: 1; transform: translateY(0) rotate(0deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/**
+ * Ripple Effect on Buttons
+ */
+function initRippleEffect() {
+    const buttons = document.querySelectorAll('.btn');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
+    // Add keyframes
+    if (!document.getElementById('ripple-keyframes')) {
+        const style = document.createElement('style');
+        style.id = 'ripple-keyframes';
+        style.textContent = `
+            @keyframes ripple {
+                to { transform: scale(4); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/**
+ * Smooth Counter Animation
+ */
+function initSmoothCounter() {
+    const counters = document.querySelectorAll('.stat-number, .exp-number');
+
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const target = parseInt(entry.target.textContent);
+                animateValue(entry.target, 0, target, 2000);
+            }
+        });
+    }, observerOptions);
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+function animateValue(element, start, end, duration) {
+    const range = end - start;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 4); // Ease out quart
+        const current = Math.floor(start + range * easeProgress);
+        element.textContent = current + '+';
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+/**
+ * Image Hover Zoom Effect
+ */
+function initImageHover() {
+    const images = document.querySelectorAll('.portfolio-image img, .about-image-container img');
+
+    images.forEach(img => {
+        img.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+        img.parentElement.addEventListener('mouseenter', () => {
+            img.style.transform = 'scale(1.1)';
+        });
+
+        img.parentElement.addEventListener('mouseleave', () => {
+            img.style.transform = 'scale(1)';
+        });
+    });
+}
+
+/**
+ * Navigation Link Hover Animation
+ */
+function initNavHover() {
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+}
+
+/**
+ * Card Shine Effect
+ */
+function initCardShine() {
+    const cards = document.querySelectorAll('.service-card, .portfolio-card, .review-card');
+
+    cards.forEach(card => {
+        const shine = document.createElement('div');
+        shine.className = 'card-shine';
+        shine.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            pointer-events: none;
+            z-index: 10;
+        `;
+        card.style.position = 'relative';
+        card.style.overflow = 'hidden';
+        card.appendChild(shine);
+
+        card.addEventListener('mouseenter', () => {
+            shine.style.transition = 'left 0.5s ease';
+            shine.style.left = '100%';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            shine.style.transition = 'none';
+            shine.style.left = '-100%';
+        });
+    });
+}
+
 // Console welcome message
-console.log('%c Welcome to SNKHAN Portfolio! ', 'background: #2DB67D; color: white; font-size: 16px; padding: 10px;');
-console.log('%c Built with HTML, CSS, and JavaScript ', 'color: #6b7280; font-size: 12px;');
+console.log('%c Welcome to SNKHAN Portfolio! ', 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 20px; padding: 15px; border-radius: 10px;');
+console.log('%c Built with Love & JavaScript ', 'color: #2DB67D; font-size: 14px; font-weight: bold;');
+console.log('%c 🚀 50 Interactive Features Loaded! ', 'color: #f093fb; font-size: 12px;');
