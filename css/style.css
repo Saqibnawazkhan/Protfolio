@@ -2187,12 +2187,28 @@ textarea {
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
-    border-color: var(--primary-color);
+    transform: scale(1.1) rotate(15deg);
+    border-color: transparent;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #ffffff;
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+}
+
+.theme-toggle i {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-toggle:hover i {
+    transform: rotate(360deg);
 }
 
 [data-theme="dark"] .theme-toggle i::before {
     content: "\f185";
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* ===== Responsive Styles ===== */
