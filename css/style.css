@@ -1735,6 +1735,8 @@ textarea {
 
 .about-content .section-tag {
     margin-bottom: var(--spacing-4);
+    display: block;
+    width: fit-content;
 }
 
 .about-content .section-title {
@@ -2277,6 +2279,8 @@ textarea {
 
 .contact-info .section-tag {
     margin-bottom: var(--spacing-4);
+    display: block;
+    width: fit-content;
 }
 
 .contact-info .section-title {
