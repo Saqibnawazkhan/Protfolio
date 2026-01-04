@@ -1069,6 +1069,14 @@ textarea {
 .service-card:hover .service-icon {
     transform: scale(1.1) rotate(5deg);
     box-shadow: 0 10px 20px rgba(45, 182, 125, 0.3);
+    animation: bounceIcon 0.6s ease;
+}
+
+@keyframes bounceIcon {
+    0%, 100% { transform: scale(1.1) rotate(5deg) translateY(0); }
+    25% { transform: scale(1.15) rotate(5deg) translateY(-10px); }
+    50% { transform: scale(1.1) rotate(5deg) translateY(0); }
+    75% { transform: scale(1.12) rotate(5deg) translateY(-5px); }
 }
 
 .service-title {
