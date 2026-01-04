@@ -641,6 +641,26 @@ textarea {
     border-radius: 50%;
     filter: blur(60px);
     opacity: 0.6;
+    transition: all 0.5s ease;
+}
+
+.decoration::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    background: inherit;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(30px);
+    animation: decorPulse 4s ease-in-out infinite;
+}
+
+@keyframes decorPulse {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
 }
 
 .decoration-1 {
