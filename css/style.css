@@ -553,13 +553,35 @@ textarea {
     color: var(--text-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    transition: all var(--transition-base);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-sidebar a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+    z-index: -1;
+}
+
+.social-sidebar a:hover::before {
+    width: 150%;
+    height: 150%;
 }
 
 .social-sidebar a:hover {
-    color: var(--primary-color);
+    color: #ffffff;
     border-color: var(--primary-color);
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 20px rgba(45, 182, 125, 0.5), 0 0 40px rgba(45, 182, 125, 0.3);
 }
 
 .hero-container {
