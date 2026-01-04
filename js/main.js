@@ -901,84 +901,65 @@ function initMagneticButtons() {
 }
 
 /**
- * Custom Cursor Effect
+ * Custom Cursor Effect - Modern dot style
  */
 function initCursorEffect() {
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
-    const cursorFollower = document.createElement('div');
-    cursorFollower.className = 'cursor-follower';
     document.body.appendChild(cursor);
-    document.body.appendChild(cursorFollower);
 
-    // Add styles
+    // Add styles - simple elegant dot cursor
     const style = document.createElement('style');
     style.textContent = `
         .custom-cursor {
-            width: 10px;
-            height: 10px;
-            background: var(--primary-color);
+            width: 8px;
+            height: 8px;
+            background: #2DB67D;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 10000;
-            transition: transform 0.1s ease;
-            mix-blend-mode: difference;
+            transition: transform 0.15s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(45, 182, 125, 0.5);
         }
-        .cursor-follower {
+        .custom-cursor.hover {
             width: 40px;
             height: 40px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.3s ease, width 0.3s, height 0.3s;
-            opacity: 0.5;
+            background: transparent;
+            border: 2px solid #2DB67D;
+            box-shadow: 0 0 25px rgba(45, 182, 125, 0.4);
         }
-        .cursor-hover {
-            transform: scale(1.5);
-        }
-        .cursor-follower.hover {
-            width: 60px;
-            height: 60px;
-            border-color: #f093fb;
+        .custom-cursor.clicking {
+            transform: translate(-50%, -50%) scale(0.8);
         }
         @media (max-width: 768px) {
-            .custom-cursor, .cursor-follower { display: none; }
+            .custom-cursor { display: none; }
         }
     `;
     document.head.appendChild(style);
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursor.style.left = mouseX - 5 + 'px';
-        cursor.style.top = mouseY - 5 + 'px';
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
 
-    function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.1;
-        cursorY += (mouseY - cursorY) * 0.1;
-        cursorFollower.style.left = cursorX - 20 + 'px';
-        cursorFollower.style.top = cursorY - 20 + 'px';
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
+    document.addEventListener('mousedown', () => {
+        cursor.classList.add('clicking');
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.classList.remove('clicking');
+    });
 
     // Hover effect on interactive elements
     const hoverElements = document.querySelectorAll('a, button, .service-card, .portfolio-card');
     hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
-            cursor.classList.add('cursor-hover');
-            cursorFollower.classList.add('hover');
+            cursor.classList.add('hover');
         });
         el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('cursor-hover');
-            cursorFollower.classList.remove('hover');
+            cursor.classList.remove('hover');
         });
     });
 }
