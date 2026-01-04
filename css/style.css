@@ -549,6 +549,18 @@ textarea {
     object-position: top;
     border-radius: 130px 130px 20px 20px;
     z-index: 2;
+    border: 3px solid transparent;
+    background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+                linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea) border-box;
+    background-size: 100% 100%, 400% 400%;
+    animation: gradientBorder 8s ease infinite;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+}
+
+@keyframes gradientBorder {
+    0% { background-position: 0% 0%, 0% 50%; }
+    50% { background-position: 0% 0%, 100% 50%; }
+    100% { background-position: 0% 0%, 0% 50%; }
 }
 
 /* Animated SVG Line */
