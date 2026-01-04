@@ -682,7 +682,10 @@ function initReviewSystem() {
     const reviewForm = document.getElementById('review-form');
     const reviewsContainer = document.getElementById('reviews-container');
 
-    if (!openModalBtn || !reviewModal) return;
+    if (!openModalBtn || !reviewModal || !reviewsContainer) {
+        console.log('Review system elements not found');
+        return;
+    }
 
     // Open modal
     openModalBtn.addEventListener('click', () => {
@@ -823,11 +826,17 @@ function initReviewSystem() {
 
     // Load reviews from localStorage
     function loadReviews() {
-        const reviews = JSON.parse(localStorage.getItem('portfolio_reviews') || '[]');
+        // First, remove "no reviews" message if it exists
+        const noReviewsMsg = reviewsContainer.querySelector('.no-reviews-message');
+        if (noReviewsMsg) {
+            noReviewsMsg.remove();
+        }
+
+        let reviews = JSON.parse(localStorage.getItem('portfolio_reviews') || '[]');
 
         // Add some default reviews if none exist
         if (reviews.length === 0) {
-            const defaultReviews = [
+            reviews = [
                 {
                     id: 1,
                     name: 'Ahmed Hassan',
@@ -853,16 +862,11 @@ function initReviewSystem() {
                     date: '2024-10-08T09:15:00.000Z'
                 }
             ];
-            localStorage.setItem('portfolio_reviews', JSON.stringify(defaultReviews));
-            defaultReviews.forEach(review => addReviewToUI(review, false));
-        } else {
-            // Remove "no reviews" message
-            const noReviewsMsg = reviewsContainer.querySelector('.no-reviews-message');
-            if (noReviewsMsg) {
-                noReviewsMsg.remove();
-            }
-            reviews.forEach(review => addReviewToUI(review, false));
+            localStorage.setItem('portfolio_reviews', JSON.stringify(reviews));
         }
+
+        // Display all reviews
+        reviews.forEach(review => addReviewToUI(review, false));
     }
 
     // Add review card to UI
