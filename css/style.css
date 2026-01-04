@@ -804,7 +804,34 @@ textarea {
 }
 
 .talk-circle:hover .talk-circle-inner {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 30px var(--primary-color), 0 0 60px var(--primary-color);
+}
+
+.talk-circle:hover .rotating-text {
+    animation-duration: 5s;
+}
+
+.talk-circle::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px dashed var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+    animation: rotateBorder 20s linear infinite;
+    transition: opacity 0.3s ease;
+}
+
+.talk-circle:hover::after {
+    opacity: 1;
+}
+
+@keyframes rotateBorder {
+    to { transform: rotate(360deg); }
 }
 
 /* Hero Shapes */
