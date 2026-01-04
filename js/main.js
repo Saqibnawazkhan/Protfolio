@@ -1048,7 +1048,8 @@ function createParticle(container) {
  * Text Reveal Animation
  */
 function initTextReveal() {
-    const titles = document.querySelectorAll('.section-title, .hero-title');
+    // Only apply to section titles, not hero title (to preserve name visibility)
+    const titles = document.querySelectorAll('.section-title');
 
     titles.forEach(title => {
         const text = title.textContent;

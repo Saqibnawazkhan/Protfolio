@@ -697,15 +697,7 @@ textarea {
     padding-top: 100px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, var(--bg-primary));
-    background-size: 400% 400%;
-    animation: heroGradient 15s ease infinite;
-}
-
-@keyframes heroGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 .hero-bg-decorations {
@@ -1162,12 +1154,8 @@ textarea {
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: var(--spacing-4);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientText 5s ease infinite;
+    color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes gradientText {
@@ -1179,7 +1167,7 @@ textarea {
 .hero-subtitle {
     font-size: var(--font-size-lg);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 3px;
     margin-bottom: var(--spacing-4);
     min-height: 30px;
@@ -1190,7 +1178,7 @@ textarea {
 }
 
 .hero-subtitle .role-text {
-    color: var(--primary-color);
+    color: #2DB67D;
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -1219,7 +1207,7 @@ textarea {
 
 .hero-description {
     font-size: var(--font-size-lg);
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     max-width: 600px;
     margin: 0 auto var(--spacing-8);
 }
