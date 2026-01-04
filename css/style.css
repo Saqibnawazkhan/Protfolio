@@ -2324,6 +2324,14 @@ textarea {
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--text-primary);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.form-group:focus-within label {
+    color: #667eea;
+    transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
 }
 
 .form-group input,
