@@ -325,6 +325,26 @@ textarea {
     50% { box-shadow: 0 0 50px rgba(102, 126, 234, 0.6), 0 0 80px rgba(118, 75, 162, 0.3); }
 }
 
+/* ===== Scroll Progress Indicator ===== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe);
+    background-size: 300% 100%;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+    animation: progressGradient 3s linear infinite;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5), 0 0 20px rgba(118, 75, 162, 0.3);
+}
+
+@keyframes progressGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
 /* ===== Header / Navbar ===== */
 .header {
     position: fixed;

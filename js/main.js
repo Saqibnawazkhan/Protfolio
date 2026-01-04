@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initImageHover();
     initNavHover();
     initCardShine();
+    initScrollProgress();
 });
 
 /**
@@ -1243,6 +1244,20 @@ function initCardShine() {
             shine.style.transition = 'none';
             shine.style.left = '-100%';
         });
+    });
+}
+
+/**
+ * Scroll Progress Indicator
+ */
+function initScrollProgress() {
+    const progressBar = document.getElementById('scroll-progress');
+    if (!progressBar) return;
+
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
     });
 }
 
