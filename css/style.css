@@ -384,21 +384,24 @@ textarea {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
     width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width var(--transition-base);
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 2px;
+    transform: translateX(-50%);
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--text-primary);
+    color: #667eea;
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
 }
 
 .download-cv {
