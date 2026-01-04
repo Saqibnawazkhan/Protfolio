@@ -326,7 +326,7 @@ textarea {
 .logo-icon {
     width: 36px;
     height: 36px;
-    background-color: var(--secondary-color);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #ffffff;
     border-radius: var(--radius-md);
     display: flex;
@@ -334,6 +334,25 @@ textarea {
     justify-content: center;
     font-weight: 700;
     font-size: var(--font-size-lg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo:hover .logo-icon {
+    transform: rotate(360deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+.logo-text {
+    transition: all 0.3s ease;
+}
+
+.logo:hover .logo-text {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 [data-theme="dark"] .logo-icon {
