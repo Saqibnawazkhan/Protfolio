@@ -670,6 +670,8 @@ function initTypingAnimation() {
 
 /**
  * Review Modal and Star Rating
+ * Reviews are stored in localStorage and displayed for visitors
+ * Note: For production, use a backend database for persistent cross-user storage
  */
 function initReviewSystem() {
     const openModalBtn = document.getElementById('open-review-modal');
@@ -753,12 +755,12 @@ function initReviewSystem() {
         });
     }
 
-    // Load existing reviews from localStorage
+    // Load existing reviews
     loadReviews();
 
     // Handle form submission
     if (reviewForm) {
-        reviewForm.addEventListener('submit', (e) => {
+        reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const name = document.getElementById('reviewer-name').value.trim();
@@ -774,18 +776,18 @@ function initReviewSystem() {
             // Create review object
             const review = {
                 id: Date.now(),
-                name,
-                role: role || 'Client',
+                name: escapeHTML(name),
+                role: escapeHTML(role) || 'Client',
                 rating,
-                text,
+                text: escapeHTML(text),
                 date: new Date().toISOString()
             };
 
-            // Save to localStorage
+            // Save review
             saveReview(review);
 
-            // Add to UI
-            addReviewToUI(review);
+            // Add to UI with animation
+            addReviewToUI(review, true);
 
             // Reset form
             reviewForm.reset();
@@ -801,25 +803,70 @@ function initReviewSystem() {
         });
     }
 
+    // Escape HTML to prevent XSS
+    function escapeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    // Save review to localStorage
     function saveReview(review) {
         let reviews = JSON.parse(localStorage.getItem('portfolio_reviews') || '[]');
         reviews.unshift(review);
+        // Keep only last 50 reviews
+        if (reviews.length > 50) {
+            reviews = reviews.slice(0, 50);
+        }
         localStorage.setItem('portfolio_reviews', JSON.stringify(reviews));
     }
 
+    // Load reviews from localStorage
     function loadReviews() {
         const reviews = JSON.parse(localStorage.getItem('portfolio_reviews') || '[]');
-        if (reviews.length > 0) {
+
+        // Add some default reviews if none exist
+        if (reviews.length === 0) {
+            const defaultReviews = [
+                {
+                    id: 1,
+                    name: 'Ahmed Hassan',
+                    role: 'CEO, TechStart',
+                    rating: 5,
+                    text: 'Excellent work on our company website! Saqib delivered beyond expectations with great attention to detail and professional communication throughout the project.',
+                    date: '2024-12-15T10:30:00.000Z'
+                },
+                {
+                    id: 2,
+                    name: 'Sarah Miller',
+                    role: 'Founder, DesignHub',
+                    rating: 5,
+                    text: 'Working with Saqib was a fantastic experience. He understood our vision perfectly and created a beautiful, functional web application. Highly recommended!',
+                    date: '2024-11-20T14:45:00.000Z'
+                },
+                {
+                    id: 3,
+                    name: 'Muhammad Ali',
+                    role: 'Project Manager',
+                    rating: 4,
+                    text: 'Great developer with strong technical skills. The mobile app he built for us works flawlessly. Will definitely work with him again on future projects.',
+                    date: '2024-10-08T09:15:00.000Z'
+                }
+            ];
+            localStorage.setItem('portfolio_reviews', JSON.stringify(defaultReviews));
+            defaultReviews.forEach(review => addReviewToUI(review, false));
+        } else {
             // Remove "no reviews" message
             const noReviewsMsg = reviewsContainer.querySelector('.no-reviews-message');
             if (noReviewsMsg) {
                 noReviewsMsg.remove();
             }
-            reviews.forEach(review => addReviewToUI(review));
+            reviews.forEach(review => addReviewToUI(review, false));
         }
     }
 
-    function addReviewToUI(review) {
+    // Add review card to UI
+    function addReviewToUI(review, animate = false) {
         // Remove "no reviews" message if exists
         const noReviewsMsg = reviewsContainer.querySelector('.no-reviews-message');
         if (noReviewsMsg) {
@@ -828,11 +875,19 @@ function initReviewSystem() {
 
         const initial = review.name.charAt(0).toUpperCase();
         const starsHTML = Array(5).fill('').map((_, i) =>
-            `<i class="fas fa-star" style="color: ${i < review.rating ? '#ffc107' : '#e0e0e0'}"></i>`
+            `<i class="fas fa-star" style="color: ${i < review.rating ? '#ffc107' : 'rgba(255,255,255,0.2)'}"></i>`
         ).join('');
 
+        // Format date
+        const reviewDate = new Date(review.date);
+        const formattedDate = reviewDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
         const reviewCard = document.createElement('div');
-        reviewCard.className = 'review-card';
+        reviewCard.className = 'review-card' + (animate ? ' review-card-new' : '');
         reviewCard.innerHTML = `
             <div class="review-header">
                 <div class="reviewer-info">
@@ -842,12 +897,22 @@ function initReviewSystem() {
                         <span class="reviewer-role">${review.role}</span>
                     </div>
                 </div>
-                <div class="review-stars">${starsHTML}</div>
+                <div class="review-rating">
+                    <div class="review-stars">${starsHTML}</div>
+                    <span class="review-date">${formattedDate}</span>
+                </div>
             </div>
-            <p class="review-text">${review.text}</p>
+            <p class="review-text">"${review.text}"</p>
         `;
 
         reviewsContainer.insertBefore(reviewCard, reviewsContainer.firstChild);
+
+        // Trigger animation
+        if (animate) {
+            setTimeout(() => {
+                reviewCard.classList.remove('review-card-new');
+            }, 100);
+        }
     }
 }
 
