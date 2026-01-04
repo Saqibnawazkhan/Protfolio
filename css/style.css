@@ -1384,10 +1384,20 @@ textarea {
 
 .portfolio-tech span {
     padding: var(--spacing-1) var(--spacing-3);
-    background-color: var(--bg-primary);
-    color: var(--text-secondary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    color: #667eea;
     font-size: var(--font-size-xs);
     border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.portfolio-tech span:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
 .portfolio-cta {
