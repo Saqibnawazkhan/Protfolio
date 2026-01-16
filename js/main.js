@@ -981,39 +981,39 @@ function initMagneticButtons() {
 }
 
 /**
- * Custom Cursor Effect - Modern dot style
+ * Custom Cursor Effect - Subtle professional style
  */
 function initCursorEffect() {
+    // Skip on touch devices
+    if ('ontouchstart' in window) return;
+
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
     document.body.appendChild(cursor);
 
-    // Add styles - simple elegant dot cursor
+    // Add styles - subtle professional cursor
     const style = document.createElement('style');
     style.textContent = `
         .custom-cursor {
-            width: 8px;
-            height: 8px;
-            background: #2DB67D;
+            width: 6px;
+            height: 6px;
+            background: #4F46E5;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 10000;
-            transition: transform 0.15s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+            transition: transform 0.1s ease, opacity 0.2s ease;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px rgba(45, 182, 125, 0.5);
+            opacity: 0.8;
         }
         .custom-cursor.hover {
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: 2px solid #2DB67D;
-            box-shadow: 0 0 25px rgba(45, 182, 125, 0.4);
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0.5;
         }
         .custom-cursor.clicking {
             transform: translate(-50%, -50%) scale(0.8);
         }
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .custom-cursor { display: none; }
         }
     `;
