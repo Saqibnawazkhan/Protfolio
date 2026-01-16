@@ -1259,109 +1259,77 @@ textarea {
 /* ===== Services Section ===== */
 .services {
     padding: var(--spacing-20) 0;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
 }
 
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-8);
+    gap: var(--spacing-6);
 }
 
 .service-card {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     border-radius: var(--radius-xl);
     padding: var(--spacing-8);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
     cursor: pointer;
     position: relative;
-    overflow: hidden;
-    background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
-                linear-gradient(135deg, transparent 30%, rgba(45, 182, 125, 0.3) 50%, transparent 70%) border-box;
-}
-
-.service-card::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent, var(--primary-color), transparent 30%);
-    animation: rotateBg 4s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-}
-
-.service-card:hover::after {
-    opacity: 0.1;
-}
-
-@keyframes rotateBg {
-    to { transform: rotate(360deg); }
-}
-
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(45, 182, 125, 0.1) 0%, rgba(45, 182, 125, 0) 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(45, 182, 125, 0.2);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
     border-color: var(--primary-color);
 }
 
-.service-card:hover::before {
-    opacity: 1;
+[data-theme="dark"] .service-card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .service-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .service-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    width: 56px;
+    height: 56px;
+    background: var(--bg-gradient-1);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-size-2xl);
-    color: #ffffff;
-    margin-bottom: var(--spacing-6);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    z-index: 1;
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-5);
+    transition: all 0.3s ease;
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 10px 20px rgba(45, 182, 125, 0.3);
-    animation: bounceIcon 0.6s ease;
+    background: var(--primary-color);
+    color: #ffffff;
+    transform: scale(1.05);
 }
 
-@keyframes bounceIcon {
-    0%, 100% { transform: scale(1.1) rotate(5deg) translateY(0); }
-    25% { transform: scale(1.15) rotate(5deg) translateY(-10px); }
-    50% { transform: scale(1.1) rotate(5deg) translateY(0); }
-    75% { transform: scale(1.12) rotate(5deg) translateY(-5px); }
+[data-theme="dark"] .service-icon {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--primary-light);
+}
+
+[data-theme="dark"] .service-card:hover .service-icon {
+    background: var(--primary-color);
+    color: #ffffff;
 }
 
 .service-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-2);
     transition: color 0.3s ease;
-    position: relative;
-    z-index: 1;
 }
 
 .service-card:hover .service-title {
@@ -1369,59 +1337,47 @@ textarea {
 }
 
 .service-description {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     color: var(--text-secondary);
     margin-bottom: var(--spacing-4);
-    line-height: 1.7;
-    position: relative;
-    z-index: 1;
+    line-height: var(--line-height-relaxed);
 }
 
 .services-cta {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
     text-align: center;
-    margin-top: var(--spacing-12);
-    font-size: var(--font-size-lg);
-    color: var(--text-secondary);
+    margin-top: var(--spacing-10);
+    font-size: var(--font-size-base);
+    color: var(--primary-color);
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    padding: var(--spacing-4) var(--spacing-8);
-    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+    padding: var(--spacing-3) var(--spacing-6);
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border: 2px solid transparent;
-}
-
-.services-cta::before {
-    content: '→ ';
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.services-cta::after {
-    content: ' ←';
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
-    display: inline-block;
+    background: var(--bg-gradient-1);
+    border: 1px solid transparent;
 }
 
 .services-cta:hover {
-    color: var(--primary-color);
-    background-color: rgba(45, 182, 125, 0.1);
+    background: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
 }
 
-.services-cta:hover::before {
-    transform: translateX(-5px);
+.services-cta i {
+    transition: transform 0.3s ease;
 }
 
-.services-cta:hover::after {
-    transform: translateX(5px);
+.services-cta:hover i {
+    transform: translateX(4px);
 }
+
 
 /* ===== Portfolio Section ===== */
 .portfolio {
