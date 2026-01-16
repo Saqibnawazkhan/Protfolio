@@ -593,7 +593,7 @@
 
             <!-- Leave a Review Button -->
             <div class="review-cta">
-                <button class="btn btn-primary" id="open-review-modal">
+                <button class="btn btn-primary" id="open-review-modal" onclick="document.getElementById('review-modal').classList.add('active'); document.body.style.overflow='hidden';">
                     <i class="fas fa-star"></i>
                     Leave a Review
                 </button>
@@ -602,9 +602,9 @@
     </section>
 
     <!-- Review Modal -->
-    <div class="review-modal" id="review-modal">
+    <div class="review-modal" id="review-modal" onclick="if(event.target===this){this.classList.remove('active'); document.body.style.overflow='';}">
         <div class="review-modal-content">
-            <button class="modal-close" id="close-review-modal">
+            <button class="modal-close" id="close-review-modal" onclick="document.getElementById('review-modal').classList.remove('active'); document.body.style.overflow='';">
                 <i class="fas fa-times"></i>
             </button>
             <h3 class="modal-title">Share Your Experience</h3>

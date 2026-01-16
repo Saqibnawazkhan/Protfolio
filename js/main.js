@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavHover();
     initCardShine();
     initScrollProgress();
+    initReviewSystem();
 });
 
 /**
@@ -674,6 +675,8 @@ function initTypingAnimation() {
  * Note: For production, use a backend database for persistent cross-user storage
  */
 function initReviewSystem() {
+    console.log('initReviewSystem called');
+
     const openModalBtn = document.getElementById('open-review-modal');
     const closeModalBtn = document.getElementById('close-review-modal');
     const reviewModal = document.getElementById('review-modal');
@@ -682,22 +685,33 @@ function initReviewSystem() {
     const reviewForm = document.getElementById('review-form');
     const reviewsContainer = document.getElementById('reviews-container');
 
+    console.log('openModalBtn:', openModalBtn);
+    console.log('reviewModal:', reviewModal);
+    console.log('reviewsContainer:', reviewsContainer);
+
     if (!openModalBtn || !reviewModal || !reviewsContainer) {
         console.log('Review system elements not found');
         return;
     }
 
+    console.log('Adding click listener to Leave a Review button');
+
     // Open modal
-    openModalBtn.addEventListener('click', () => {
+    openModalBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Leave a Review button clicked!');
         reviewModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
 
     // Close modal
-    closeModalBtn.addEventListener('click', () => {
-        reviewModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            reviewModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
 
     // Close on backdrop click
     reviewModal.addEventListener('click', (e) => {
@@ -919,9 +933,6 @@ function initReviewSystem() {
         }
     }
 }
-
-// Initialize review system when DOM is ready
-document.addEventListener('DOMContentLoaded', initReviewSystem);
 
 /**
  * 3D Tilt Effect for Cards

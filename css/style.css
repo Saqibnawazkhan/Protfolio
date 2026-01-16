@@ -1,26 +1,36 @@
 /* ===== CSS Variables ===== */
 :root {
-    /* Colors */
-    --primary-color: #2DB67D;
-    --primary-light: #3fd497;
-    --primary-dark: #249962;
-    --secondary-color: #1a1a2e;
-    --text-primary: #1a1a2e;
-    --text-secondary: #6b7280;
-    --text-light: #9ca3af;
-    --bg-primary: #f8f9fa;
-    --bg-secondary: #ffffff;
-    --bg-gradient-1: rgba(255, 200, 200, 0.3);
-    --bg-gradient-2: rgba(200, 230, 255, 0.3);
-    --bg-gradient-3: rgba(230, 200, 255, 0.3);
-    --border-color: #e5e7eb;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    /* Professional Color Palette - Elegant Blue-Gray Theme */
+    --primary-color: #4F46E5;
+    --primary-light: #6366F1;
+    --primary-dark: #4338CA;
+    --accent-color: #06B6D4;
+    --accent-light: #22D3EE;
+    --secondary-color: #0F172A;
+    --text-primary: #1E293B;
+    --text-secondary: #475569;
+    --text-light: #94A3B8;
+    --text-muted: #64748B;
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    --bg-gradient-1: rgba(79, 70, 229, 0.05);
+    --bg-gradient-2: rgba(6, 182, 212, 0.05);
+    --bg-gradient-3: rgba(99, 102, 241, 0.05);
+    --border-color: #E2E8F0;
+    --border-light: #F1F5F9;
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+    --error-color: #EF4444;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+    --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+    --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.15);
 
-    /* Typography */
-    --font-family: 'Poppins', sans-serif;
+    /* Typography - Refined Scale */
+    --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -31,6 +41,12 @@
     --font-size-4xl: 2.25rem;
     --font-size-5xl: 3rem;
     --font-size-6xl: 3.75rem;
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
 
     /* Spacing */
     --spacing-1: 0.25rem;
@@ -66,18 +82,30 @@
     --z-tooltip: 500;
 }
 
-/* Dark Mode Variables */
+/* Dark Mode Variables - Professional Dark Theme */
 [data-theme="dark"] {
-    --primary-color: #3fd497;
-    --text-primary: #f3f4f6;
-    --text-secondary: #d1d5db;
-    --text-light: #9ca3af;
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-gradient-1: rgba(45, 182, 125, 0.1);
-    --bg-gradient-2: rgba(59, 130, 246, 0.1);
-    --bg-gradient-3: rgba(139, 92, 246, 0.1);
+    --primary-color: #818CF8;
+    --primary-light: #A5B4FC;
+    --primary-dark: #6366F1;
+    --accent-color: #22D3EE;
+    --accent-light: #67E8F9;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-light: #94A3B8;
+    --text-muted: #64748B;
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    --bg-gradient-1: rgba(129, 140, 248, 0.1);
+    --bg-gradient-2: rgba(34, 211, 238, 0.1);
+    --bg-gradient-3: rgba(99, 102, 241, 0.1);
     --border-color: #334155;
+    --border-light: #475569;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.35);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(129, 140, 248, 0.2);
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
@@ -2097,6 +2125,13 @@ textarea {
 .review-cta {
     text-align: center;
     margin-top: var(--spacing-8);
+    position: relative;
+    z-index: 10;
+}
+
+.review-cta .btn {
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 .review-cta .btn i {
