@@ -725,7 +725,7 @@ textarea {
     padding-top: 100px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(180deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
 }
 
 .hero-bg-decorations {
@@ -741,84 +741,45 @@ textarea {
 .decoration {
     position: absolute;
     border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.6;
+    filter: blur(80px);
+    opacity: 0.4;
     transition: all 0.5s ease;
 }
 
-.decoration::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50%;
-    height: 50%;
-    background: inherit;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(30px);
-    animation: decorPulse 4s ease-in-out infinite;
-}
-
-@keyframes decorPulse {
-    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
-}
-
 .decoration-1 {
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    top: 10%;
-    left: -5%;
-    animation: floatDecoration1 8s ease-in-out infinite;
+    width: 500px;
+    height: 500px;
+    background: var(--primary-color);
+    top: -10%;
+    left: -10%;
+    opacity: 0.15;
 }
 
 .decoration-2 {
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    top: 5%;
-    right: -10%;
-    animation: floatDecoration2 10s ease-in-out infinite;
+    width: 600px;
+    height: 600px;
+    background: var(--accent-color);
+    top: 20%;
+    right: -15%;
+    opacity: 0.1;
 }
 
 .decoration-3 {
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    bottom: 20%;
-    right: 20%;
-    animation: floatDecoration3 7s ease-in-out infinite;
+    width: 400px;
+    height: 400px;
+    background: var(--primary-light);
+    bottom: 10%;
+    right: 30%;
+    opacity: 0.08;
 }
 
 .decoration-4 {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    bottom: 30%;
-    left: 10%;
-    animation: floatDecoration4 9s ease-in-out infinite;
-}
-
-@keyframes floatDecoration1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, -20px) scale(1.1); }
-}
-
-@keyframes floatDecoration2 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(-40px, 30px) rotate(10deg); }
-}
-
-@keyframes floatDecoration3 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(20px, -30px) scale(0.9); }
-}
-
-@keyframes floatDecoration4 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-20px, 20px); }
+    width: 300px;
+    height: 300px;
+    background: var(--accent-light);
+    bottom: 20%;
+    left: 5%;
+    opacity: 0.1;
 }
 
 /* Social Sidebar */
@@ -829,22 +790,31 @@ textarea {
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
+    gap: var(--spacing-4);
     z-index: 10;
 }
 
 .social-sidebar a {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #94A3B8;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(71, 85, 105, 0.3);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
     position: relative;
-    overflow: visible;
+    backdrop-filter: blur(8px);
+}
+
+.social-sidebar a:hover {
+    color: #ffffff;
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
 }
 
 /* Tooltip for social sidebar */
@@ -852,51 +822,25 @@ textarea {
     content: attr(aria-label);
     position: absolute;
     left: 55px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: var(--secondary-color);
     color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
     transform: translateX(-10px);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s ease;
     pointer-events: none;
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-lg);
 }
 
 .social-sidebar a:hover::after {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
-}
-
-.social-sidebar a::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: var(--primary-color);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.4s, height 0.4s;
-    z-index: -1;
-}
-
-.social-sidebar a:hover::before {
-    width: 150%;
-    height: 150%;
-}
-
-.social-sidebar a:hover {
-    color: #ffffff;
-    border-color: var(--primary-color);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 0 20px rgba(45, 182, 125, 0.5), 0 0 40px rgba(45, 182, 125, 0.3);
 }
 
 .hero-container {
@@ -1174,39 +1118,33 @@ textarea {
 
 /* Hero Text */
 .hero-text {
-    max-width: 800px;
+    max-width: 700px;
 }
 
 .hero-title {
-    font-size: var(--font-size-6xl);
-    font-weight: 800;
-    line-height: 1.1;
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
     margin-bottom: var(--spacing-4);
-    color: #ffffff;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes gradientText {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    color: #F1F5F9;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .hero-subtitle {
     font-size: var(--font-size-lg);
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 3px;
-    margin-bottom: var(--spacing-4);
+    color: #94A3B8;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-6);
     min-height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    gap: 4px;
 }
 
 .hero-subtitle .role-text {
-    color: #2DB67D;
+    color: var(--primary-light);
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -1214,8 +1152,7 @@ textarea {
 .hero-subtitle .typing-cursor {
     color: var(--primary-color);
     font-weight: 300;
-    animation: blink 0.8s infinite, cursorGlow 2s ease-in-out infinite;
-    text-shadow: 0 0 10px var(--primary-color);
+    animation: blink 1s infinite;
 }
 
 @keyframes blink {
@@ -1223,27 +1160,54 @@ textarea {
     51%, 100% { opacity: 0; }
 }
 
-@keyframes cursorGlow {
-    0%, 100% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); }
-    50% { text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color), 0 0 60px var(--primary-color); }
-}
-
 .hero-subtitle .separator {
-    color: var(--primary-color);
+    color: #64748B;
     margin: 0 var(--spacing-2);
 }
 
 .hero-description {
-    font-size: var(--font-size-lg);
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
+    font-size: var(--font-size-base);
+    color: #94A3B8;
+    max-width: 500px;
     margin: 0 auto var(--spacing-8);
+    line-height: var(--line-height-relaxed);
 }
 
 .hero-buttons {
     display: flex;
     gap: var(--spacing-4);
     justify-content: center;
+}
+
+.hero-buttons .btn-primary {
+    background: var(--primary-color);
+    color: #ffffff;
+    padding: var(--spacing-4) var(--spacing-8);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+}
+
+.hero-buttons .btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+.hero-buttons .btn-secondary {
+    background: transparent;
+    color: #F1F5F9;
+    padding: var(--spacing-4) var(--spacing-8);
+    border: 1px solid #475569;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hero-buttons .btn-secondary:hover {
+    background: rgba(71, 85, 105, 0.3);
+    border-color: #64748B;
 }
 
 /* Company Logos */
