@@ -1382,70 +1382,64 @@ textarea {
 /* ===== Portfolio Section ===== */
 .portfolio {
     padding: var(--spacing-20) 0;
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .portfolio {
+    background-color: var(--bg-tertiary);
 }
 
 .portfolio-filter {
     display: flex;
     justify-content: center;
-    gap: var(--spacing-3);
-    margin-bottom: var(--spacing-12);
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-10);
     flex-wrap: wrap;
 }
 
 .filter-btn {
-    padding: var(--spacing-3) var(--spacing-6);
+    padding: var(--spacing-2) var(--spacing-5);
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--text-secondary);
-    background-color: var(--bg-secondary);
-    border-radius: var(--radius-full);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-    border: 2px solid transparent;
+    background-color: transparent;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    border: none;
 }
 
-.filter-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
+.filter-btn:hover {
+    color: var(--primary-color);
+    background: var(--bg-gradient-1);
 }
 
-.filter-btn:hover::before,
-.filter-btn.active::before {
-    left: 100%;
-}
-
-.filter-btn:hover,
 .filter-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--primary-color);
     color: #ffffff;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-8);
+    gap: var(--spacing-6);
 }
 
 .portfolio-card {
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .portfolio-card {
+    background-color: var(--bg-secondary);
 }
 
 .portfolio-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
+    border-color: transparent;
 }
 
 .portfolio-card.hidden {
@@ -1454,7 +1448,7 @@ textarea {
 
 .portfolio-image {
     position: relative;
-    height: 220px;
+    height: 200px;
     overflow: hidden;
 }
 
@@ -1462,11 +1456,11 @@ textarea {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-slow);
+    transition: transform 0.4s ease;
 }
 
 .portfolio-card:hover .portfolio-image img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .portfolio-overlay {
@@ -1475,60 +1469,48 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    background: rgba(15, 23, 42, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transform: translateY(100%);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: opacity 0.3s ease;
 }
 
 .portfolio-card:hover .portfolio-overlay {
     opacity: 1;
-    transform: translateY(0);
 }
 
 .portfolio-links {
     display: flex;
-    gap: var(--spacing-4);
+    gap: var(--spacing-3);
 }
 
 .portfolio-link {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: #ffffff;
-    border-radius: 50%;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-primary);
-    font-size: var(--font-size-lg);
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all var(--transition-base);
-}
-
-.portfolio-card:hover .portfolio-link {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.portfolio-card:hover .portfolio-link:nth-child(2) {
-    transition-delay: 100ms;
+    color: var(--secondary-color);
+    font-size: var(--font-size-base);
+    transition: all 0.2s ease;
 }
 
 .portfolio-link:hover {
     background-color: var(--primary-color);
     color: #ffffff;
+    transform: translateY(-2px);
 }
 
 .portfolio-info {
-    padding: var(--spacing-6);
+    padding: var(--spacing-5);
 }
 
 .portfolio-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: var(--spacing-2);
@@ -1537,8 +1519,8 @@ textarea {
 .portfolio-description {
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-4);
-    line-height: 1.6;
+    margin-bottom: var(--spacing-3);
+    line-height: var(--line-height-relaxed);
 }
 
 .portfolio-tech {
@@ -1549,10 +1531,11 @@ textarea {
 
 .portfolio-tech span {
     padding: var(--spacing-1) var(--spacing-3);
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    color: #667eea;
+    background: var(--bg-gradient-1);
+    color: var(--primary-color);
     font-size: var(--font-size-xs);
-    border-radius: var(--radius-full);
+    font-weight: 500;
+    border-radius: var(--radius-md);
     transition: all 0.3s ease;
     cursor: pointer;
     border: 1px solid transparent;
