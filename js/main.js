@@ -999,7 +999,7 @@ function initCursorEffect() {
         .custom-cursor {
             width: 6px;
             height: 6px;
-            background: #9BA8AB;
+            background: #4F46E5;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
@@ -1337,9 +1337,9 @@ function initAdminPanel() {
     const adminProjects = document.getElementById('admin-projects');
     const adminLoginBtn = document.getElementById('admin-login-btn');
     const adminPasswordInput = document.getElementById('admin-password');
-    const adminLogoutBtn = document.getElementById('admin-logout-btn');
-    const addProjectForm = document.getElementById('add-project-form');
-    const adminProjectsList = document.getElementById('admin-projects-list');
+    const adminLogoutBtn = document.getElementById('admin-logout');
+    const addProjectForm = document.getElementById('project-form');
+    const adminProjectsList = document.getElementById('projects-list');
 
     if (!adminPanel) return;
 
@@ -1348,7 +1348,7 @@ function initAdminPanel() {
 
     // Check if already logged in
     const isLoggedIn = sessionStorage.getItem('admin_logged_in') === 'true';
-    if (isLoggedIn) {
+    if (isLoggedIn && adminLogin && adminProjects) {
         adminLogin.style.display = 'none';
         adminProjects.style.display = 'block';
         loadProjectsList();
@@ -1388,13 +1388,13 @@ function initAdminPanel() {
     });
 
     // Login functionality
-    if (adminLoginBtn) {
+    if (adminLoginBtn && adminPasswordInput) {
         adminLoginBtn.addEventListener('click', () => {
             const password = adminPasswordInput.value;
             if (password === ADMIN_PASSWORD) {
                 sessionStorage.setItem('admin_logged_in', 'true');
-                adminLogin.style.display = 'none';
-                adminProjects.style.display = 'block';
+                if (adminLogin) adminLogin.style.display = 'none';
+                if (adminProjects) adminProjects.style.display = 'block';
                 adminPasswordInput.value = '';
                 loadProjectsList();
                 showNotification('Welcome, Admin!', 'success');
@@ -1416,8 +1416,8 @@ function initAdminPanel() {
     if (adminLogoutBtn) {
         adminLogoutBtn.addEventListener('click', () => {
             sessionStorage.removeItem('admin_logged_in');
-            adminLogin.style.display = 'block';
-            adminProjects.style.display = 'none';
+            if (adminLogin) adminLogin.style.display = 'block';
+            if (adminProjects) adminProjects.style.display = 'none';
             showNotification('Logged out successfully', 'success');
         });
     }
@@ -1433,9 +1433,9 @@ function initAdminPanel() {
                 category: document.getElementById('project-category').value,
                 description: document.getElementById('project-description').value.trim(),
                 image: document.getElementById('project-image').value.trim(),
-                liveLink: document.getElementById('project-live-link').value.trim(),
-                githubLink: document.getElementById('project-github-link').value.trim(),
-                technologies: document.getElementById('project-technologies').value.trim()
+                liveLink: document.getElementById('project-link').value.trim(),
+                githubLink: document.getElementById('project-github').value.trim(),
+                technologies: document.getElementById('project-tech').value.trim()
             };
 
             // Save project
@@ -1516,7 +1516,7 @@ function deleteProject(projectId) {
     }
 
     // Check if no projects left
-    const adminProjectsList = document.getElementById('admin-projects-list');
+    const adminProjectsList = document.getElementById('projects-list');
     const remainingProjects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
     if (remainingProjects.length === 0 && adminProjectsList) {
         adminProjectsList.innerHTML = '<p class="no-projects">No projects added yet.</p>';

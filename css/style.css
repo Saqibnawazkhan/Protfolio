@@ -1,33 +1,33 @@
 /* ===== CSS Variables ===== */
 :root {
-    /* Professional Dark Color Palette - Slate Gray Theme */
-    --primary-color: #4A5C6A;
-    --primary-light: #9BA8AB;
-    --primary-dark: #253745;
-    --accent-color: #4A5C6A;
-    --accent-light: #9BA8AB;
-    --secondary-color: #06141B;
-    --text-primary: #CCD0CF;
-    --text-secondary: #9BA8AB;
-    --text-light: #4A5C6A;
-    --text-muted: #253745;
-    --bg-primary: #06141B;
-    --bg-secondary: #11212D;
-    --bg-tertiary: #253745;
-    --bg-gradient-1: rgba(74, 92, 106, 0.15);
-    --bg-gradient-2: rgba(155, 168, 171, 0.1);
-    --bg-gradient-3: rgba(37, 55, 69, 0.2);
-    --border-color: #253745;
-    --border-light: #11212D;
-    --success-color: #4A5C6A;
-    --warning-color: #9BA8AB;
+    /* Professional Dark Color Palette - Indigo Blue Theme */
+    --primary-color: #4F46E5;
+    --primary-light: #818CF8;
+    --primary-dark: #3730A3;
+    --accent-color: #2DB67D;
+    --accent-light: #4ADE80;
+    --secondary-color: #0A0F1C;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-light: #64748B;
+    --text-muted: #475569;
+    --bg-primary: #0A0F1C;
+    --bg-secondary: #111827;
+    --bg-tertiary: #1E293B;
+    --bg-gradient-1: rgba(79, 70, 229, 0.15);
+    --bg-gradient-2: rgba(45, 182, 125, 0.1);
+    --bg-gradient-3: rgba(129, 140, 248, 0.08);
+    --border-color: #1E293B;
+    --border-light: #334155;
+    --success-color: #2DB67D;
+    --warning-color: #F59E0B;
     --error-color: #EF4444;
-    --shadow-sm: 0 1px 2px rgba(6, 20, 27, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(6, 20, 27, 0.4), 0 2px 4px -1px rgba(6, 20, 27, 0.3);
-    --shadow-lg: 0 10px 15px -3px rgba(6, 20, 27, 0.5), 0 4px 6px -2px rgba(6, 20, 27, 0.4);
-    --shadow-xl: 0 20px 25px -5px rgba(6, 20, 27, 0.5), 0 10px 10px -5px rgba(6, 20, 27, 0.4);
-    --shadow-2xl: 0 25px 50px -12px rgba(6, 20, 27, 0.6);
-    --shadow-glow: 0 0 20px rgba(74, 92, 106, 0.3);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.3);
 
     /* Typography - Refined Scale */
     --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -84,23 +84,23 @@
 
 /* Dark Mode Variables - Same as default (always dark) */
 [data-theme="dark"] {
-    --primary-color: #4A5C6A;
-    --primary-light: #9BA8AB;
-    --primary-dark: #253745;
-    --accent-color: #4A5C6A;
-    --accent-light: #9BA8AB;
-    --text-primary: #CCD0CF;
-    --text-secondary: #9BA8AB;
-    --text-light: #4A5C6A;
-    --text-muted: #253745;
-    --bg-primary: #06141B;
-    --bg-secondary: #11212D;
-    --bg-tertiary: #253745;
-    --bg-gradient-1: rgba(74, 92, 106, 0.15);
-    --bg-gradient-2: rgba(155, 168, 171, 0.1);
-    --bg-gradient-3: rgba(37, 55, 69, 0.2);
-    --border-color: #253745;
-    --border-light: #11212D;
+    --primary-color: #4F46E5;
+    --primary-light: #818CF8;
+    --primary-dark: #3730A3;
+    --accent-color: #2DB67D;
+    --accent-light: #4ADE80;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-light: #64748B;
+    --text-muted: #475569;
+    --bg-primary: #0A0F1C;
+    --bg-secondary: #111827;
+    --bg-tertiary: #1E293B;
+    --bg-gradient-1: rgba(79, 70, 229, 0.15);
+    --bg-gradient-2: rgba(45, 182, 125, 0.1);
+    --bg-gradient-3: rgba(129, 140, 248, 0.08);
+    --border-color: #1E293B;
+    --border-light: #334155;
 }
 
 /* ===== Reset & Base Styles ===== */
@@ -716,7 +716,7 @@ textarea {
     padding-top: 100px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, #06141B 0%, #11212D 50%, #06141B 100%);
+    background: linear-gradient(180deg, #0A0F1C 0%, #111827 50%, #0A0F1C 100%);
 }
 
 .hero-bg-decorations {
@@ -2426,8 +2426,8 @@ textarea {
 
 /* ===== Footer ===== */
 .footer {
-    background-color: #06141B;
-    color: #CCD0CF;
+    background-color: #0A0F1C;
+    color: #F1F5F9;
     padding-top: var(--spacing-12);
 }
 
