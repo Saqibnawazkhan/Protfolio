@@ -808,6 +808,76 @@
         <i class="fas fa-moon"></i>
     </button>
 
+    <!-- Secret Admin Panel (Press Ctrl+Shift+A to open) -->
+    <div class="admin-panel" id="admin-panel">
+        <div class="admin-panel-content">
+            <div class="admin-header">
+                <h3>Admin Panel</h3>
+                <button class="admin-close" id="admin-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="admin-login" id="admin-login">
+                <h4>Enter Admin Password</h4>
+                <div class="form-group">
+                    <input type="password" id="admin-password" placeholder="Password">
+                </div>
+                <button class="btn btn-primary" id="admin-login-btn">Login</button>
+                <p class="admin-hint">Hint: Press Ctrl+Shift+A to toggle panel</p>
+            </div>
+
+            <!-- Project Form (shown after login) -->
+            <div class="admin-projects" id="admin-projects" style="display: none;">
+                <h4>Add New Project</h4>
+                <form id="project-form">
+                    <div class="form-group">
+                        <label for="project-title">Project Title</label>
+                        <input type="text" id="project-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-category">Category</label>
+                        <select id="project-category" required>
+                            <option value="web">Web Development</option>
+                            <option value="app">App Development</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description">Description</label>
+                        <textarea id="project-description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-image">Image URL</label>
+                        <input type="url" id="project-image" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-link">Live Link</label>
+                        <input type="url" id="project-link" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-github">GitHub Link</label>
+                        <input type="url" id="project-github" placeholder="https://github.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-tech">Technologies (comma separated)</label>
+                        <input type="text" id="project-tech" placeholder="HTML, CSS, JavaScript">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </form>
+
+                <div class="admin-projects-list">
+                    <h4>Manage Projects</h4>
+                    <div id="projects-list"></div>
+                </div>
+
+                <button class="btn btn-secondary" id="admin-logout">Logout</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="js/main.js"></script>
 </body>

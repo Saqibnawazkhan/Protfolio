@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initCardShine();
     initScrollProgress();
     initReviewSystem();
+    initAdminPanel();
+    loadAdminProjects();
 });
 
 /**
@@ -997,7 +999,7 @@ function initCursorEffect() {
         .custom-cursor {
             width: 6px;
             height: 6px;
-            background: #4F46E5;
+            background: #9BA8AB;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
@@ -1321,6 +1323,315 @@ function initScrollProgress() {
         const scrolled = (window.scrollY / windowHeight) * 100;
         progressBar.style.width = scrolled + '%';
     });
+}
+
+/**
+ * Admin Panel for Project Management
+ * Secret panel accessible via Ctrl+Shift+A
+ * Password protected for owner access only
+ */
+function initAdminPanel() {
+    const adminPanel = document.getElementById('admin-panel');
+    const adminClose = document.getElementById('admin-close');
+    const adminLogin = document.getElementById('admin-login');
+    const adminProjects = document.getElementById('admin-projects');
+    const adminLoginBtn = document.getElementById('admin-login-btn');
+    const adminPasswordInput = document.getElementById('admin-password');
+    const adminLogoutBtn = document.getElementById('admin-logout-btn');
+    const addProjectForm = document.getElementById('add-project-form');
+    const adminProjectsList = document.getElementById('admin-projects-list');
+
+    if (!adminPanel) return;
+
+    // Secret password for admin access (change this to your desired password)
+    const ADMIN_PASSWORD = 'snkhan2024';
+
+    // Check if already logged in
+    const isLoggedIn = sessionStorage.getItem('admin_logged_in') === 'true';
+    if (isLoggedIn) {
+        adminLogin.style.display = 'none';
+        adminProjects.style.display = 'block';
+        loadProjectsList();
+    }
+
+    // Keyboard shortcut to open admin panel (Ctrl+Shift+A)
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+            e.preventDefault();
+            adminPanel.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+
+    // Close admin panel
+    if (adminClose) {
+        adminClose.addEventListener('click', () => {
+            adminPanel.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close on backdrop click
+    adminPanel.addEventListener('click', (e) => {
+        if (e.target === adminPanel) {
+            adminPanel.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && adminPanel.classList.contains('active')) {
+            adminPanel.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Login functionality
+    if (adminLoginBtn) {
+        adminLoginBtn.addEventListener('click', () => {
+            const password = adminPasswordInput.value;
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('admin_logged_in', 'true');
+                adminLogin.style.display = 'none';
+                adminProjects.style.display = 'block';
+                adminPasswordInput.value = '';
+                loadProjectsList();
+                showNotification('Welcome, Admin!', 'success');
+            } else {
+                showNotification('Incorrect password', 'error');
+                adminPasswordInput.value = '';
+            }
+        });
+
+        // Allow Enter key to submit
+        adminPasswordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                adminLoginBtn.click();
+            }
+        });
+    }
+
+    // Logout functionality
+    if (adminLogoutBtn) {
+        adminLogoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('admin_logged_in');
+            adminLogin.style.display = 'block';
+            adminProjects.style.display = 'none';
+            showNotification('Logged out successfully', 'success');
+        });
+    }
+
+    // Add project form submission
+    if (addProjectForm) {
+        addProjectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const project = {
+                id: Date.now(),
+                title: document.getElementById('project-title').value.trim(),
+                category: document.getElementById('project-category').value,
+                description: document.getElementById('project-description').value.trim(),
+                image: document.getElementById('project-image').value.trim(),
+                liveLink: document.getElementById('project-live-link').value.trim(),
+                githubLink: document.getElementById('project-github-link').value.trim(),
+                technologies: document.getElementById('project-technologies').value.trim()
+            };
+
+            // Save project
+            saveProject(project);
+
+            // Add to portfolio grid
+            addProjectToPortfolio(project);
+
+            // Update admin projects list
+            loadProjectsList();
+
+            // Reset form
+            addProjectForm.reset();
+
+            showNotification('Project added successfully!', 'success');
+        });
+    }
+
+    // Load projects list in admin panel
+    function loadProjectsList() {
+        if (!adminProjectsList) return;
+
+        const projects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+
+        if (projects.length === 0) {
+            adminProjectsList.innerHTML = '<p class="no-projects">No projects added yet.</p>';
+            return;
+        }
+
+        adminProjectsList.innerHTML = projects.map(project => `
+            <div class="admin-project-item" data-id="${project.id}">
+                <div class="admin-project-info">
+                    <h4>${escapeHTML(project.title)}</h4>
+                    <span class="admin-project-category">${project.category}</span>
+                </div>
+                <button class="admin-delete-btn" onclick="deleteProject(${project.id})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+}
+
+/**
+ * Save project to localStorage
+ */
+function saveProject(project) {
+    let projects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+    projects.unshift(project);
+    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+}
+
+/**
+ * Delete project from localStorage and UI
+ */
+function deleteProject(projectId) {
+    let projects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+    projects = projects.filter(p => p.id !== projectId);
+    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+
+    // Remove from portfolio grid
+    const projectCard = document.querySelector(`.portfolio-card[data-project-id="${projectId}"]`);
+    if (projectCard) {
+        projectCard.remove();
+    }
+
+    // Update admin list
+    const adminItem = document.querySelector(`.admin-project-item[data-id="${projectId}"]`);
+    if (adminItem) {
+        adminItem.remove();
+    }
+
+    // Check if no projects left
+    const adminProjectsList = document.getElementById('admin-projects-list');
+    const remainingProjects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+    if (remainingProjects.length === 0 && adminProjectsList) {
+        adminProjectsList.innerHTML = '<p class="no-projects">No projects added yet.</p>';
+    }
+
+    showNotification('Project deleted', 'success');
+}
+
+/**
+ * Add project card to portfolio grid
+ */
+function addProjectToPortfolio(project) {
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    if (!portfolioGrid) return;
+
+    const techTags = project.technologies.split(',').map(tech =>
+        `<span class="portfolio-tech">${tech.trim()}</span>`
+    ).join('');
+
+    const card = document.createElement('div');
+    card.className = 'portfolio-card reveal active';
+    card.setAttribute('data-category', project.category);
+    card.setAttribute('data-project-id', project.id);
+    card.innerHTML = `
+        <div class="portfolio-image">
+            <img src="${project.image || 'https://via.placeholder.com/600x400?text=Project'}" alt="${escapeHTMLAttr(project.title)}">
+            <div class="portfolio-overlay">
+                <div class="portfolio-links">
+                    ${project.liveLink ? `<a href="${project.liveLink}" class="portfolio-link" target="_blank" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
+                    ${project.githubLink ? `<a href="${project.githubLink}" class="portfolio-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-content">
+            <span class="portfolio-category">${project.category}</span>
+            <h3 class="portfolio-title">${escapeHTMLAttr(project.title)}</h3>
+            <p class="portfolio-description">${escapeHTMLAttr(project.description)}</p>
+            <div class="portfolio-tech-stack">
+                ${techTags}
+            </div>
+        </div>
+    `;
+
+    // Insert at the beginning of the grid
+    portfolioGrid.insertBefore(card, portfolioGrid.firstChild);
+
+    // Re-apply effects
+    initTiltEffect();
+    initCardShine();
+}
+
+/**
+ * Escape HTML attributes
+ */
+function escapeHTMLAttr(str) {
+    return str.replace(/&/g, '&amp;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#39;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;');
+}
+
+/**
+ * Load admin projects on page load
+ */
+function loadAdminProjects() {
+    const projects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+
+    if (!portfolioGrid || projects.length === 0) return;
+
+    // Add each saved project to the portfolio
+    projects.forEach(project => {
+        // Check if project already exists in DOM
+        if (document.querySelector(`.portfolio-card[data-project-id="${project.id}"]`)) {
+            return;
+        }
+
+        const techTags = project.technologies.split(',').map(tech =>
+            `<span class="portfolio-tech">${tech.trim()}</span>`
+        ).join('');
+
+        const card = document.createElement('div');
+        card.className = 'portfolio-card reveal active';
+        card.setAttribute('data-category', project.category);
+        card.setAttribute('data-project-id', project.id);
+        card.innerHTML = `
+            <div class="portfolio-image">
+                <img src="${project.image || 'https://via.placeholder.com/600x400?text=Project'}" alt="${escapeHTMLAttr(project.title)}">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-links">
+                        ${project.liveLink ? `<a href="${project.liveLink}" class="portfolio-link" target="_blank" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
+                        ${project.githubLink ? `<a href="${project.githubLink}" class="portfolio-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">${project.category}</span>
+                <h3 class="portfolio-title">${escapeHTMLAttr(project.title)}</h3>
+                <p class="portfolio-description">${escapeHTMLAttr(project.description)}</p>
+                <div class="portfolio-tech-stack">
+                    ${techTags}
+                </div>
+            </div>
+        `;
+
+        // Insert at the beginning of the grid
+        portfolioGrid.insertBefore(card, portfolioGrid.firstChild);
+    });
+
+    // Re-apply effects if projects were added
+    if (projects.length > 0) {
+        initTiltEffect();
+        initCardShine();
+    }
 }
 
 // Console welcome message
