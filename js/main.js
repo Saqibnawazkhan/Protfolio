@@ -1358,7 +1358,7 @@ function initAdminPanel() {
     document.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && e.key === 'A') {
             e.preventDefault();
-            adminPanel.classList.add('active');
+            adminPanel.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
     });
@@ -1366,7 +1366,7 @@ function initAdminPanel() {
     // Close admin panel
     if (adminClose) {
         adminClose.addEventListener('click', () => {
-            adminPanel.classList.remove('active');
+            adminPanel.style.display = 'none';
             document.body.style.overflow = '';
         });
     }
@@ -1374,15 +1374,15 @@ function initAdminPanel() {
     // Close on backdrop click
     adminPanel.addEventListener('click', (e) => {
         if (e.target === adminPanel) {
-            adminPanel.classList.remove('active');
+            adminPanel.style.display = 'none';
             document.body.style.overflow = '';
         }
     });
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && adminPanel.classList.contains('active')) {
-            adminPanel.classList.remove('active');
+        if (e.key === 'Escape' && adminPanel.style.display === 'flex') {
+            adminPanel.style.display = 'none';
             document.body.style.overflow = '';
         }
     });

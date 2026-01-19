@@ -809,71 +809,71 @@
     </button>
 
     <!-- Secret Admin Panel (Press Ctrl+Shift+A to open) -->
-    <div class="admin-panel" id="admin-panel">
-        <div class="admin-panel-content">
-            <div class="admin-header">
-                <h3>Admin Panel</h3>
-                <button class="admin-close" id="admin-close">
+    <div class="admin-panel" id="admin-panel" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; align-items: center; justify-content: center;">
+        <div class="admin-panel-content" style="background: #FFFFFF; border-radius: 16px; padding: 32px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; border: 3px solid #4F46E5; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+            <div class="admin-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #E5E7EB;">
+                <h3 style="color: #1F2937; font-size: 1.5rem; font-weight: 700; margin: 0;">Admin Panel</h3>
+                <button class="admin-close" id="admin-close" style="background: #F3F4F6; border: none; color: #6B7280; font-size: 1.25rem; cursor: pointer; padding: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
 
             <!-- Login Form -->
             <div class="admin-login" id="admin-login">
-                <h4>Enter Admin Password</h4>
-                <div class="form-group">
-                    <input type="password" id="admin-password" placeholder="Password">
+                <h4 style="color: #1F2937; margin-bottom: 16px; font-weight: 600; font-size: 1.125rem;">Enter Admin Password</h4>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <input type="password" id="admin-password" placeholder="Password" style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                 </div>
-                <button class="btn btn-primary" id="admin-login-btn">Login</button>
-                <p class="admin-hint">Hint: Press Ctrl+Shift+A to toggle panel</p>
+                <button class="btn btn-primary" id="admin-login-btn" style="width: 100%; padding: 12px; background: #4F46E5; color: #FFFFFF; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">Login</button>
+                <p class="admin-hint" style="font-size: 0.75rem; color: #9CA3AF; margin-top: 16px; text-align: center;">Hint: Press Ctrl+Shift+A to toggle panel</p>
             </div>
 
             <!-- Project Form (shown after login) -->
             <div class="admin-projects" id="admin-projects" style="display: none;">
-                <h4>Add New Project</h4>
+                <h4 style="color: #1F2937; margin-bottom: 16px; font-weight: 600; font-size: 1.125rem;">Add New Project</h4>
                 <form id="project-form">
-                    <div class="form-group">
-                        <label for="project-title">Project Title</label>
-                        <input type="text" id="project-title" required>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-title" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">Project Title</label>
+                        <input type="text" id="project-title" required style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                     </div>
-                    <div class="form-group">
-                        <label for="project-category">Category</label>
-                        <select id="project-category" required>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-category" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">Category</label>
+                        <select id="project-category" required style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                             <option value="web">Web Development</option>
                             <option value="app">App Development</option>
                             <option value="design">UI/UX Design</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="project-description">Description</label>
-                        <textarea id="project-description" rows="3" required></textarea>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-description" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">Description</label>
+                        <textarea id="project-description" rows="3" required style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="project-image">Image URL</label>
-                        <input type="url" id="project-image" placeholder="https://...">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-image" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">Image URL</label>
+                        <input type="url" id="project-image" placeholder="https://..." style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                     </div>
-                    <div class="form-group">
-                        <label for="project-link">Live Link</label>
-                        <input type="url" id="project-link" placeholder="https://...">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-link" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">Live Link</label>
+                        <input type="url" id="project-link" placeholder="https://..." style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                     </div>
-                    <div class="form-group">
-                        <label for="project-github">GitHub Link</label>
-                        <input type="url" id="project-github" placeholder="https://github.com/...">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-github" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">GitHub Link</label>
+                        <input type="url" id="project-github" placeholder="https://github.com/..." style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                     </div>
-                    <div class="form-group">
-                        <label for="project-tech">Technologies (comma separated)</label>
-                        <input type="text" id="project-tech" placeholder="HTML, CSS, JavaScript">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="project-tech" style="color: #374151; font-size: 0.875rem; margin-bottom: 8px; display: block; font-weight: 600;">Technologies (comma separated)</label>
+                        <input type="text" id="project-tech" placeholder="HTML, CSS, JavaScript" style="width: 100%; padding: 12px; background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 8px; color: #1F2937; font-size: 0.875rem; box-sizing: border-box;">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Project</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background: #4F46E5; color: #FFFFFF; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">Add Project</button>
                 </form>
 
-                <div class="admin-projects-list">
-                    <h4>Manage Projects</h4>
+                <div class="admin-projects-list" style="margin-top: 32px; padding-top: 24px; border-top: 2px solid #E5E7EB;">
+                    <h4 style="color: #1F2937; margin-bottom: 16px; font-weight: 600; font-size: 1.125rem;">Manage Projects</h4>
                     <div id="projects-list"></div>
                 </div>
 
-                <button class="btn btn-secondary" id="admin-logout">Logout</button>
+                <button class="btn btn-secondary" id="admin-logout" style="width: 100%; padding: 12px; background: #F3F4F6; border: 2px solid #E5E7EB; border-radius: 8px; color: #374151; font-weight: 600; cursor: pointer; font-size: 1rem; margin-top: 16px;">Logout</button>
             </div>
         </div>
     </div>
